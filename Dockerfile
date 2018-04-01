@@ -1,16 +1,11 @@
-FROM hypriot/rpi-iojs:1.4.1
-MAINTAINER Umer Kayani <umer.kayani@hotmail.com.com>
+FROM resin/rpi-raspbian:jessie
 
-# Adding source files
-ADD src/ /src
+# Update
+RUN apt-get update
 
-WORKDIR /src
+# Install apache2
+RUN apt-get install -y apache2
 
-# Install 
-RUN npm install
-
-# Open Port 80
 EXPOSE 80
-
-# Run Node.js
-CMD ["node", "index.js"]
+ENTRYPOINT ["/usr/sbin/apache2ctl"]
+CMD ["-D", "FOREGROUND"]
