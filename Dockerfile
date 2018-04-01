@@ -1,17 +1,16 @@
-# DOCKER-VERSION 1.0.0
-FROM resin/rpi-raspbian
+FROM hypriot/rpi-iojs:1.4.1
+MAINTAINER Umer Kayani <umer.kayani@hotmail.com.com>
 
-# install required packages
-RUN apt-get update
-RUN apt-get install -y wget dialog
+# Adding source files
+ADD src/ /src
 
-# install nodejs
-RUN wget http://node-arm.herokuapp.com/node_latest_armhf.deb
-RUN dpkg -i node_latest_armhf.deb
+WORKDIR /src
 
-COPY . /src
-RUN cd /src; npm install
+# Install 
+RUN npm install
 
-# run application
-EXPOSE 8080
-CMD ["node", "/src/index.js"]
+# Open Port 80
+EXPOSE 80
+
+# Run Node.js
+CMD ["node", "index.js"]
