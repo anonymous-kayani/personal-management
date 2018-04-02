@@ -1,10 +1,14 @@
 # personal-management
 
-A Clojure library designed to ... well, that part is up to you.
+A small web application written in clojure for personal management and capable of running on raspberry pi using docker and kuberenetes.
 
 ## Usage
 
-FIXME
+lein uberjar
+lein run
+
+docker build -t umerkayani/personal-management:v3 .
+docker run -d -p 8080:4000 umerkayani/personal-management:v3
 
 ## License
 
