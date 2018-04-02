@@ -1,11 +1,10 @@
-FROM resin/rpi-raspbian:jessie
+FROM resin/raspberry-pi-openjdk
+MAINTAINER Umer Kayani <umer.kayani@hotmail.com>
 
-# Update
-RUN apt-get update
+RUN sudo apt-get update
 
-# Install apache2
-RUN apt-get install -y apache2
+ADD target/personal-management-0.1.0-SNAPSHOT-standalone.jar /bin/personal-management.jar
 
-EXPOSE 80
-ENTRYPOINT ["/usr/sbin/apache2ctl"]
-CMD ["-D", "FOREGROUND"]
+EXPOSE 8080
+
+CMD ["java", "-jar", "/bin/personal-management.jar"]
