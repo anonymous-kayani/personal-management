@@ -1,5 +1,6 @@
 (ns personal-management.core
-  (:require [ring.adapter.jetty :as jty])
+  (:require [ring.adapter.jetty :as jty]
+            [personal-management.handlers :refer [app-routes]])
   (:gen-class))
 
 (defn handler [request]
@@ -10,7 +11,7 @@
 (defonce server-atom (atom :not-initialized))
 
 (defn start [port]
-  (reset! server-atom (jty/run-jetty #'handler {:port port :join? false})))
+  (reset! server-atom (jty/run-jetty #'app-routes {:port port :join? false})))
 
 (defn stop []
   (.stop @server-atom))
